@@ -1,0 +1,409 @@
+% ##################################################
+% #                                                #
+% # Autor: B. Michel Döhring                       #
+% # E-Mail: micheld.93@gmail.com                   #
+% # Version: 2.0                                   #
+% # Datum: Oktober 2017                            #
+% #                                                #
+% ##################################################
+
+
+% ######################################
+% # Konfigurieren der Dokumentenklasse #
+% ######################################
+
+\documentclass[
+    a4paper,				% Papierformat
+    abstract=on,		   	% Abstract mit Überschrift
+    openright,				% Start Chapter rechte Seite
+    numbers=noenddot,		% kein Punkt nach Kapitelnummer
+    parskip=half	,		% keine Absatzeinzüge, Sprung zwischen Absätzen
+    twoside,            		% Zweiseitig
+    12pt,               		% Schriftgröße
+    pagesize=auto,      		% schreibt die Papiergröße korrekt ins Ausgabedokument
+    headsepline=on,  		% Linie unter der Kopfzeile
+    captions=tableheading,
+    listof=totoc,   		% Verzeichnisse im Inhaltsverzeichnis
+    bibliography=totoc,
+    index=totoc 
+]{scrreprt}
+
+
+% ####################
+% # Pakete einbinden #
+% ####################
+% Pakete erweitern LaTeX um zusätzliche Funktionen.
+% Weitere sollten in der Datei <01_EigenePakete.tex> hinzugefügt werden.
+\usepackage{scrhack}
+% Legt die Zeichenkodierung fest, z.B UTF8
+\usepackage[utf8]{inputenc}
+% Verwendung der Zeichentabelle T1, für deutschsprachige Dokumente sinnvoll
+\usepackage[T1]{fontenc}
+% Silbentrennung nach neuer deutscher und englischer Rechtschreibung
+\usepackage[english,french,ngerman]{babel}
+% Mehr Farben als den Standard
+\usepackage[usenames,dvipsnames,table,xcdraw]{xcolor}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% #########################
+% # Mathe und NaWi Pakete #
+% #########################
+% Mathepaket für align-Umgebung
+\usepackage{amsmath}
+% Mathepaket für erweiterungen von "amsmath"
+\usepackage{mathtools}
+% Mathe und sonstige Symbole
+% "amsfonts" wird automatisch geladen, msam, msbm, eufm Schriften
+% \usepackage{amsfonts}
+\usepackage{amssymb}
+% Ermöglicht die Nutzung von \SI[per-mode=fraction]{1,345}{\coulomb\per\mole}
+\usepackage[
+	locale=DE,
+	per-mode=fraction,
+	output-decimal-marker={{,}},
+	separate-uncertainty,
+	range-phrase={{ bis }},
+]{siunitx}
+%Für Origin-Symbole:
+\usepackage{oplotsymbl}
+% Chemie-Pakete
+% chemmacros
+% hat eigenes Setup in 03_SetupPakete
+\usepackage{chemmacros}
+%\usepackage{chemfig}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% ##################################
+% # Tabellen- und Abbildungspakete #
+% ##################################
+% Für Gleitposition H
+\usepackage{float}
+% Multirow in Tabellen:
+\usepackage{multirow}
+% Für schöne Tabellen, bietet dicke/dünne Linien an
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{5pt}
+% #####-------------------------------------------------#####
+% #####-------------------------------------------------#####
+% Beide Pakete werden für die Ausrichtung der Tabellenspalten benötigt
+\usepackage{array}
+% Für lange Tabellen
+\usepackage{longtable}
+% Zum flexiblen Einbinden von Grafiken, [pdftex] ist Option
+\usepackage{graphicx}
+%Zum Einbinden von PDFs im Dokument
+%\usepackage{pdfpages}
+% #####-------------------------------------------------#####
+% #####-------------------------------------------------#####
+% Darstellung für Caption
+% hat eigenes Setup in 03_SetupPakete
+\usepackage[font=small,labelfont=bf,labelsep=endash,format=plain]{caption}
+% Fließtext um Figure-Umgebung
+\usepackage{wrapfig}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% ##########################
+% # Schriften, Listen etc. #
+% ##########################
+% Einfaches wechseln zwischen unterschiedlichen Zeilenabständen
+\usepackage{setspace}
+% Zusatzfunktionen zum zitieren
+\usepackage{cite}
+% Für Notizen:
+\usepackage{todonotes}
+% Wird für Kopf- und Fußzeile benötigt
+\usepackage[automark]{scrlayer-scrpage}
+\automark [chapter]{chapter}
+\automark*[section]{}
+% Andere Nummerierstile bei enumerate
+\usepackage{paralist}
+% Index-Verzeichnis
+\usepackage{makeidx}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% #############################################
+% # Konfiguration des Abkürzungsverzeichnises #
+% #############################################
+% ACRO-Paket einbinden
+\usepackage{acro}
+% ACRO einstellungen
+\acsetup{			
+	only-used=false,			% auch die nicht verwendeten in die Liste aufnehmen
+	hyperref=true,		    % Link der Acros im Text
+	sort=true,  				% Liste sortieren
+    list-heading=addchap
+}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% ############################
+% # weitere Pakete einbinden #
+% ############################
+\input{001_EigenePakete}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% ###############################
+% # Randeinstellungen festlegen #
+% ###############################
+% Rand-Einstellungen für das Dokument
+\usepackage{geometry}
+\geometry{verbose,nomarginpar,lmargin=35mm,rmargin=20mm,bmargin=30mm}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% ####################################
+% # Grund-Konfiguration von Hyperref #
+% ####################################
+% Verlinkt Textstellen im PDF Dokument
+% erst nach allen Paketen laden
+% aber vor "geometry" laden
+% hat eigenes Haupt-Setup in 03_SetupPakete
+\usepackage[pdfpagelabels,
+plainpages=false,
+bookmarksopen]{hyperref}
+% #####-------------------------------------------------#####
+
+% #########################
+% # Variablen importieren #
+% #########################
+
+\input{002_EigeneVariablen}
+
+% ################################
+% # Pakete Einstellungen / Setup #
+% ################################
+
+\input{003_SetupPakete}
+
+% ############################
+% # Eigene Befehle einbinden #
+% ############################
+
+\input{004_EigeneBefehle}
+
+% ##############################
+% # Eigene Einheiten einbinden #
+% ##############################
+
+\input{005_EigeneEinheiten}
+
+% ###########################
+% # Konfiguration des Index #
+% ###########################
+\makeindex
+% Worte werden durch \index{C!Crossed-beams|textbf} ins Verzeichnis aufgenommen
+
+% #####################################
+% # Abkürzungsverzeichnis importieren #
+% #####################################
+
+\input{100_AkronymDefinition}
+
+% ###########################
+% # Weitere Konfigurationen #
+% ###########################
+
+% Serifen für Überschriften
+\addtokomafont{sectioning}{\rmfamily}
+% Nummerierung der Formeln entsprechend der Chapter (z.B. 1.1)
+\numberwithin{equation}{chapter}
+% Ändert Schriftgröße und Zeilenabstand bei captions
+\addtokomafont{caption}{\small\linespread{1}\selectfont}
+
+% #######################################
+% # Kopf- und Fußzeile konfigurieren    #
+% #######################################
+
+\clearpairofpagestyles
+\ihead{}									% Innenseite der Kopfzeile
+\chead{}                                    % Mitte der Kopfzeile
+\ohead{\headmark}              				% Außenseite der Kopfzeile
+\ifoot{}                                    % Innnenseite der Fußzeile
+\cfoot[- \pagemark{} -]{- \pagemark{} -}  	% Mitte der Fußzeile
+\ofoot{}    								% Aussenseite der Fußzeile
+
+\addtokomafont{pagenumber}{\normalfont}
+\pagestyle{scrheadings}
+
+% ####################
+% # Beginn Doukument #
+% ####################
+
+\begin{document}
+
+% 1.5er Zeilenabstand
+\onehalfspacing
+% Römische Ziffern als Seitenzahlen für Titelseite bis einschließlich dem Inhaltsverzeichnis
+\pagenumbering{roman}
+
+% ########################
+% # Titelseite einbinden #
+% ########################
+
+\input{006_Titelseite}
+
+% ################################
+% # Inhaltsverzeichnis einbinden #
+% ################################
+% Farbe der Links auf schwarz
+\hypersetup{linkcolor=black}
+\tableofcontents
+
+% ########################################
+% # Anzeigen des Abkürzungsverzeichnises #
+% ########################################
+
+%====================Beginn des Abkürzungsverzeichnisses====================%
+
+% alle außer der Klasse 'symbole' auflisten:
+\acsetup{
+	list-style  = extra-longtable,
+	extra-style = plain,
+	list-short-format = {\bfseries}
+}
+
+\printacronyms[exclude-classes=symbole, name=Abkürzungsverzeichnis]
+
+%====================Beginn des Symbolverzeichnisses====================%
+
+% nur die Klasse 'symbole' auflisten:
+\acsetup{
+  list-style  = extra-longtable-rev,
+  extra-style = plain
+}
+
+\printacronyms[include-classes=symbole, name=Symbolverzeichnis]
+
+% #####################################
+% # Das Abstract der Arbeit einbinden #
+% #####################################
+
+\cleardoublepage
+\markboth{}{} % Abstract ändert die Kopfzeile nicht
+
+\pagestyle{scrplain}
+
+\input{200_Abstract}
+
+\pagestyle{scrheadings}
+
+%=======================================================================%
+%=======================================================================%
+
+
+% Ab hier mit Kopf- und Fußzeile
+% ###################################
+% # Den Inhalt der Arbeit einbinden #
+% ###################################
+\clearpage
+\pagenumbering{arabic}
+
+% Farbe der Links auf rot
+\hypersetup{linkcolor=red}
+% Kein Gleit-Absatz bei twoside-Format
+\raggedbottom
+
+\input{007_Trennung}
+
+\input{300_Inhalt}
+\input{301_Inhalt}
+\input{302_Inhalt}
+\input{303_Inhalt}
+\input{304_Inhalt}
+\input{305_Inhalt}
+\input{306_Inhalt}
+\input{307_Inhalt}
+\input{308_Inhalt}
+\input{309_Inhalt}
+  
+% ####################
+% # Anhang einbinden #
+% ####################
+\appendix
+	\input{400_Anhang-A}
+		\newpage
+ 	    	\input{401_Anhang-A}
+        \newpage
+    		\input{402_Anhang-A}
+        %\newpage
+    		%\input{403_Anhang-A}
+		\newpage
+    \input{500_Anhang-B}
+		\newpage
+ 	   		\input{501_Anhang-B}
+        \newpage
+    		\input{502_Anhang-B}
+        \newpage
+    		\input{503_Anhang-B}
+   	    \newpage
+        	\input{504_Anhang-B}
+   	    \newpage
+        \input{505_Anhang-B}
+%		\newpage
+%	\input{600_Anhang-C}
+%		\newpage
+%   		\input{601_Anhang-C}
+%  		\newpage
+%			\input{602_Anhang-C}
+%    	\newpage
+%			\input{603_Anhang-C}
+% 	\input{700_Anhang-D}
+%		\newpage
+%    		\input{701_Anhang-D}
+%    	\newpage
+%			\input{702_Anhang-D}
+%   	\newpage
+%			\input{703_Anhang-D}    	
+
+% ###################################
+% # Literaturverzeichnis mit BibTeX #
+% ###################################
+    
+\bibliography{literatur}
+\bibliographystyle{\varLiteraturLayout}
+
+% #######################################
+% # Abbildungs- und Tabellenverzeichnis #
+% #######################################
+
+% Farbe der Links auf schwarz
+\hypersetup{linkcolor=black}
+
+%Abbildungsverzeichnis
+\listoffigures
+
+%Tabellenverzeichnis
+\listoftables
+
+% ##############
+% # Danksagung #
+% ##############
+
+\input{800_Danksagung}
+
+% ##################################
+% # Selbstständigkeitsversicherung #
+% ##################################
+
+\input{850_Versicherung}
+
+% ########################
+% # Index des Dokumentes #
+% ########################
+
+% Farbe der Links auf rot
+\hypersetup{linkcolor=red}
+
+\printindex
+
+% #######################
+% # Ende des Dokumentes #
+% #######################
+
+\end{document}

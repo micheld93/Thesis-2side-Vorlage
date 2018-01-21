@@ -1,0 +1,58 @@
+% ################
+% # Setup Pakete #
+% ################
+
+% Pakete, die eigene "Setups" haben und ! nicht ! über "Optionen" eingestellt werden können, werden in dieser Datei konfiguriert.
+
+
+% Farben von Links etc. festlegen
+\hypersetup{
+%pdfencoding=auto,	% oder unicode
+%bookmarks=true, 	% ist Standard
+unicode=true,
+bookmarksopen=true,
+bookmarksnumbered=true,
+pdftitle={\varTitelHyper},
+pdfauthor={\varAutorEins},
+pdfsubject={Bachelor-Thesis},
+pdfcreator={Texpad und Mac OS X},
+pdfkeywords={\varKeyA}{\varKeyB}{\varKeyC}{\varKeyD}{\varKeyE},
+colorlinks=true,
+linkcolor=green,
+citecolor=RawSienna,
+filecolor=magenta,
+urlcolor=cyan
+}
+% #####-------------------------------------------------#####
+
+% #####-------------------------------------------------#####
+% Einstellungen für Chemie-Pakete "circled=formal":
+% \mch		normales Minus-Zeichen 
+% \pch		normales Plus-Zeichen
+% \fmch		umkreistes Minus-Zeichen
+% \fpch		umkreistes Plus-Zeichen
+% \el		Elektron mit normalem Minus 
+% \prt		Proton mit normalem Plus
+\chemsetup{language=english,
+modules=all, 
+%formula = chemformula
+}
+\chemsetup[phases]{pos=sub} 
+% Nummerierung der Reaktions-Formeln nach Chapter (R 1.1)
+\usechemmodule{reactions}
+\renewtagform{reaction}[R ]{(}{)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
